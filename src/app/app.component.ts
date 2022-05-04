@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WikiService } from './wiki.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'taleemabad-task';
+  title = 'Taleemabad - Task';
+  searchTerm: any;
+  results: any = [];
+
+  constructor(private wiki:WikiService) {}
+
+  onSubmit(){
+    this.wiki.search(this.searchTerm).subscribe( (res:any) =>{
+     this.results = res.query.search;
+     console.log(this.results);
+    })
+  }
+
 }
